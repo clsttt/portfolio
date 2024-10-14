@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
 :root {
-    --console-color: rgb(0, 174, 0);
+    --console-color: #00ff00;
     --theme: #050505;
     --sb-track-color: #000000;
     --sb-thumb-color: #353535;
