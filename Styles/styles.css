@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+:root {
+    --console-color: rgb(0, 174, 0);
+    --theme: #050505;
+    --sb-track-color: #000000;
+    --sb-thumb-color: #353535;
+    --sb-size: 4px;
+}
+
+* {
+    left: 0; top: 0;
+    font-family: Pixelify Sans;
+}
+
+body {
+    background-color: var(--theme);
+    transition: all 0.5s;
+}
+
+.console {
+    background-color: black;
+    position: absolute;
+    height: 60%; width: 85%;
+    left: 50%; top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 10px;
+}
+
+.console-separator {
+    position: absolute;
+    height: 2px; width: 96%;
+    left: 50%; top: 85%;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 2px;
+    background-color: var(--console-color);
+}
+
+.console-input {
+    position: absolute;
+    height: 8%; width: 96%;
+    left: 50%; top: 92%;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: black; color: var(--console-color);
+    border: none;
+    font-size: 20px;
+}
+
+.console-input:focus {
+    outline: none;
+}
+
+.console-area {
+    background-color: black;
+    position: absolute;
+    height: 75%; width: 96%;
+    left: 50%; top: 42%;
+    transform: translateX(-50%) translateY(-50%);
+    overflow-y: auto;
+    /* overflow: hidden; */
+    white-space: pre-wrap;
+}
+
+.console-area p {
+    color: var(--console-color);   
+}
+
+.console-area::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+  
+.console-area::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 15px;
+}
+  
+.console-area::-webkit-scrollbar-thumb {
+    background: var(--console-color);
+    border-radius: 15px;
+}
+  
+  @supports not selector(::-webkit-scrollbar) {
+    .console-area {
+        scrollbar-color: var(--console-color)
+                         var(--sb-track-color);
+    }
+}
