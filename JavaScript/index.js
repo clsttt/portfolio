@@ -64,7 +64,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         \n/clear  -  Clear the console.
                         \n/calculate  -  Calculate an expression.
                         \n/countdown  -  Start a countdown.
-                        \n/rps`);
+                        \n/rps
+                        \n       L [rock/paper/scissors]  -  Play against the computer.
+                        \n       L score  -  See your RPS score.`);
                     break;
 
                 case 'config':
