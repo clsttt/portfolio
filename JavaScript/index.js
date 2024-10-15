@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         \n       L theme [dark/light]  -  Change theme color.
                         \n       L bg [dark/light]  -  Change background color.
                         \n/clear  -  Clear the console.
-                        \n/calculate  -  Calculate an expression.
-                        \n/countdown  -  Start a countdown.
+                        \n/calculate [expression]  -  Calculate an expression.
+                        \n/countdown [time]  -  Start a countdown.
                         \n/rps
                         \n       L [rock/paper/scissors]  -  Play against the computer.
                         \n       L score  -  See your RPS score.`);
