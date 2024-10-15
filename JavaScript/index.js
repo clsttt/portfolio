@@ -106,6 +106,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                 display('Error : unknown background.')
                             }
                         }
+                    } else {
+                        display(`No "/>${mainCommand}" command found.`)
                     }
                 break;
                 case 'clear':
