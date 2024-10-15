@@ -91,6 +91,20 @@ document.addEventListener("DOMContentLoaded", function () {
                                 display('Error : unknown theme.');
                             }
                         }
+                    } else if (parts[1] === 'bg') {
+                        if (!parts[2]) {
+                            display('Error : missing argument.');
+                        } else {
+                            const bg = {
+                                dark: '#000',
+                                light: '#fff'
+                            }
+                            if (bg[parts[2]]) {
+                                document.documentElement.style.setProperty('--console-bg', bg[parts[2]]);
+                                display(`> Background changed to ${parts[2]}.`);
+                            } else {
+                                display('Error : unknown background.')
+                            }
                     } else {
                         display('Error : unknown configuration.');
                     }
