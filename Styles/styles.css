@@ -2,6 +2,7 @@
 
 :root {
     --console-color: #00ff00;
+    --console-bg: black;
     --theme: #050505;
     --sb-track-color: #000000;
     --sb-thumb-color: #353535;
@@ -19,12 +20,13 @@ body {
 }
 
 .console {
-    background-color: black;
+    background-color: var(--console-bg);
     position: absolute;
     height: 60%; width: 85%;
     left: 50%; top: 50%;
     transform: translateX(-50%) translateY(-50%);
     border-radius: 10px;
+    transition: all 1s;
 }
 
 .console-separator {
