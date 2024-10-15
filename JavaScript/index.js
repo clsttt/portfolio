@@ -105,8 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             } else {
                                 display('Error : unknown background.')
                             }
-                    } else {
-                        display('Error : unknown configuration.');
+                        }
                     }
                 break;
                 case 'clear':
