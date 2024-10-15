@@ -8,16 +8,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let isAtBottom = true
 
+    let rpsWin = 0
+
     const aliases = {
         h: 'help',
         cfg: 'config',
-        c: 'clear'
+        cl: 'clear',
+        calc: 'calculate',
+        cd: 'countdown'
     }
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const inputValue = input.value.trim().toLowerCase()
+        const inputValue = input.value.trim()
 
         if (inputValue) {
             process(inputValue)
@@ -41,10 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function process(command) {
-        if (!command.startsWith('/>')) {
+        if (!command.startsWith('/')) {
             display(command)
         } else {
-            const trimmedCommand = command.slice(2).trim()
+            const trimmedCommand = command.slice(1).trim()
             const parts = trimmedCommand.split(' ')
             const cmd = parts[0]
 
@@ -52,14 +56,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
             switch (mainCommand) {
                 case 'help':
-                    display("/>[help / h]  -  Display list of commands.
-                            \n/>[config / cfg]
-                            \n       L color [w / y / r / g / b]  -  Change main color.
-                            \n       L theme [dark / light]  -  Change theme color.
-                            \n       L bg [dark / light]  -  Change background color.
-                            \n/>[clear / c]  -  Clear the console.");
+                    display(`/help  -  Display list of commands.
+                        \n/config
+                        \n       L color [w/y/r/g/b]  -  Change main color.
+                        \n       L theme [dark/light]  -  Change theme color.
+                        \n       L bg [dark/light]  -  Change background color.
+                        \n/clear  -  Clear the console.
+                        \n/calculate  -  Calculate an expression.
+                        \n/countdown  -  Start a countdown.
+                        \n/rps`);
                     break;
-    
+
                 case 'config':
                     if (!parts[1]) {
                         display('Error : missing argument.');
@@ -72,7 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                 y: '#ffff00',
                                 r: '#ff0000',
                                 g: '#00ff00',
-                                b: '#0000ff'
+                                b: '#0000ff',
+                                k: '#000000'
                             };
                             if (colors[parts[2]]) {
                                 document.documentElement.style.setProperty('--console-color', colors[parts[2]]);
@@ -101,23 +109,82 @@ document.addEventListener("DOMContentLoaded", function () {
                             display('Error : missing argument.');
                         } else {
                             const bg = {
-                                dark: '#000',
-                                light: '#fff'
+                                light: '#ffffff',
+                                dark: '#000000'
+                            };
+                            const nbg = {
+                                light: '#000000',
+                                dark: '#ffffff'
                             }
                             if (bg[parts[2]]) {
                                 document.documentElement.style.setProperty('--console-bg', bg[parts[2]]);
+                                document.documentElement.style.setProperty('--nconsole-bg', nbg[parts[2]]);
                                 display(`> Background changed to ${parts[2]}.`);
                             } else {
-                                display('Error : unknown background.')
+                                display('Error : unknown theme.');
                             }
                         }
                     } else {
-                        display(`No "/>${mainCommand}" command found.`)
+                        display('Error : unknown configuration.');
                     }
-                break;
+                    break;
                 case 'clear':
                     output.innerHTML = '';
-                break;
+                    break;
+                case 'calculate':
+                    if (!parts[1]) {
+                        display('Error : missing expression.');
+                    } else {
+                        const expression = trimmedCommand.slice(cmd.length + 1).replace(/\^/g, '**')
+
+                        try {
+                            const result = eval(expression)
+                            display(`> Result : ${result}`)
+                        } catch (error) {
+                            display('Error : invalid expression provided.')
+                        }
+                    }
+                    break;
+                case 'countdown':
+                    let count = parseInt(parts[1]);
+                    if (!isNaN(count) && count > 0 && count <= 60) {
+                        let countdownInterval = setInterval(() => {
+                            display(`> ${count}`);
+                            count--;
+                            if (count < 0) {
+                                clearInterval(countdownInterval);
+                                display('> Countdown finished !');
+                            }
+                        }, 1000);
+                    } else {
+                        display('Error : invalid number provided.');
+                    }
+                    break;
+                case 'rps' :
+                    const choices = ['rock', 'paper', 'scissors']
+                    const playerChoice = parts[1];
+                    if (choices.includes(playerChoice)) {
+                        const computerChoice = choices[Math.floor(Math.random() * 3)];
+                        let result = '';
+                        if (playerChoice === computerChoice) {
+                            result = "Tie.";
+                        } else if (
+                            (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                            (playerChoice === 'scissors' && computerChoice === 'paper') ||
+                            (playerChoice === 'paper' && computerChoice === 'rock')
+                        ) {
+                            rpsWin += 1
+                            result = "Win.";
+                        } else {
+                            result = "Lose.";
+                        }
+                        display(`> You : ${playerChoice}.\n> Computer : ${computerChoice}.\n> ${result}`);
+                    } else if (playerChoice === 'score') {
+                        display(`> Rock-Paper-Scissors Score : ${rpsWin}`)
+                    } else {
+                        display('Error : invalid play.');
+                    }
+                    break;
                 default:
                     display(`> No "/>${cmd}" command found.`);
             }
