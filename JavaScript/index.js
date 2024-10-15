@@ -52,7 +52,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             switch (mainCommand) {
                 case 'help':
-                    display(`/>[help / h]  -  Display list of commands.\n/>[config / cfg]\n       L color [w / y / r / g / b]  -  Change main color.\n       L theme [dark / light]  -  Change theme color.\n/>[clear / c]  -  Clear the console.`);
+                    display("/>[help / h]  -  Display list of commands.
+                            \n/>[config / cfg]
+                            \n       L color [w / y / r / g / b]  -  Change main color.
+                            \n       L theme [dark / light]  -  Change theme color.
+                            \n       L bg [dark / light]  -  Change background color.
+                            \n/>[clear / c]  -  Clear the console.");
                     break;
     
                 case 'config':
