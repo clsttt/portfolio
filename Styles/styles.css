@@ -3,8 +3,8 @@
 :root {
     --console-color: #00ff00;
     --console-bg: #000000;
+    --nconsole-bg: #ffffff;
     --theme: #050505;
-    --sb-track-color: #000000;
     --sb-thumb-color: #353535;
     --sb-size: 4px;
 }
@@ -22,11 +22,11 @@ body {
 .console {
     background-color: var(--console-bg);
     position: absolute;
-    height: 60%; width: 85%;
+    height: 70%; width: 85%;
     left: 50%; top: 50%;
     transform: translateX(-50%) translateY(-50%);
-    border-radius: 10px;
-    transition: all 1s;
+    border-radius: 15px;
+    transition: all 0.5s;
 }
 
 .console-separator {
@@ -46,21 +46,50 @@ body {
     background-color: var(--console-bg); color: var(--console-color);
     border: none;
     font-size: 20px;
+    transition: all 0.5s;
 }
 
 .console-input:focus {
     outline: none;
 }
 
+.console-tab {
+    background-color: var(--theme);
+    width: 100%; height: 8%;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.curr-tab {
+    background-color: var(--console-bg);
+    position: relative;
+    width: 200px; height: 70%;
+    left: 50%; top: 30%;
+    transform: translateX(-50%);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.img-tab {
+    position: relative;
+    left: 5%; top: 15%;
+}
+
+.text-tab {
+    color: var(--nconsole-bg);
+    position: relative;
+    left: 25%; top: -90%;
+}
+
 .console-area {
     background-color: var(--console-bg);
     position: absolute;
-    height: 75%; width: 96%;
-    left: 50%; top: 42%;
+    height: 65%; width: 96%;
+    left: 50%; top: 45.5%;
     transform: translateX(-50%) translateY(-50%);
     overflow-y: auto;
-    /* overflow: hidden; */
     white-space: pre-wrap;
+    transition: all 0.5s;
 }
 
 .console-area p {
@@ -72,7 +101,7 @@ body {
 }
   
 .console-area::-webkit-scrollbar-track {
-    background: var(--sb-track-color);
+    background: var(--console-bg);
     border-radius: 15px;
 }
   
@@ -84,6 +113,6 @@ body {
   @supports not selector(::-webkit-scrollbar) {
     .console-area {
         scrollbar-color: var(--console-color)
-                         var(--sb-track-color);
+                         var(--console-bg);
     }
 }
