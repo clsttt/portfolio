@@ -22,7 +22,7 @@ body {
 .console {
     background-color: var(--console-bg);
     position: absolute;
-    height: 70%; width: 85%;
+    height: 65%; width: 85%;
     left: 50%; top: 50%;
     transform: translateX(-50%) translateY(-50%);
     border-radius: 15px;
