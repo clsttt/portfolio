@@ -61,6 +61,7 @@ body {
 }*/
 
 .curr-tab {
+    z-indew: 1;
     background-color: var(--console-bg);
     position: relative;
     width: 200px; height: 70%;
