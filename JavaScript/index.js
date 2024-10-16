@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cl: 'clear',
         calc: 'calculate',
         d: 'date',
-        cd: 'countdown',
+        tm: 'timer',
         clstg: 'celeste-game'
     }
 
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         \n/clear - /cl  -  Clear the console.
                         \n/calculate - /calc (expression)  -  Calculate an expression.
                         \n/date - /d  -  Display today's date and current hour.
-                        \n/countdown - /cd (timer)  -  Start a countdown.
+                        \n/timer - /tm (timer)  -  Start a countdown.
                         \n/rps
                         \n       L [rock/paper/scissors]  -  Play your choice against the computer.
                         \n       L score  -  Check your rps score.
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     display(`> ${formattedDate}`)
 
                     break;
-                case 'countdown':
+                case 'timer':
                     let count = parseInt(parts[1]);
                     if (!isNaN(count) && count > 0 && count <= 60) {
                         let countdownInterval = setInterval(() => {
@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             count--;
                             if (count < 0) {
                                 clearInterval(countdownInterval);
-                                display('> Countdown finished !');
+                                display('> Timer finished !');
                             }
                         }, 1000);
                     } else {
