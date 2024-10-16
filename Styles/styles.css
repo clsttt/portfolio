@@ -1,15 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
     --console-color: #00ff00;
     --console-bg: #000000;
     --nconsole-bg: #ffffff;
-    --theme: #111111;
+    --theme: #151515;
+
     --sb-thumb-color: #353535;
     --sb-size: 4px;
 }
 
 * {
+    z-index: 0;
     left: 0; top: 0;
     font-family: Pixelify Sans;
 }
@@ -22,12 +25,13 @@ body {
 .console {
     z-index: 0;
     background-color: var(--console-bg);
-    position: absolute;
-    height: 65%; width: 85%;
+    position: relative;
+    height: 70%; width: 85%;
     left: 50%; top: 50%;
     transform: translateX(-50%) translateY(-50%);
     border-radius: 15px;
     transition: all 0.5s;
+    /* border: 2px solid white; */
 }
 
 .console-separator {
@@ -54,33 +58,13 @@ body {
     outline: none;
 }
 
-/*.console-tab {
-    background-color: var(--theme);
-    width: 100%; height: 8%;
-    border-top-right-radius: 15px;
-    border-top-left-radius: 15px;
-}*/
-
-.curr-tab {
-    z-index: 1;
-    background-color: var(--console-bg);
-    position: relative;
-    width: 200px; height: 70%;
-    left: 50%; top: 30%;
-    transform: translateX(-50%);
-    border-top-right-radius: 15px;
-    border-top-left-radius: 15px;
-}
-
-.img-tab {
-    position: relative;
-    left: 5%; top: 15%;
-}
-
 .text-tab {
+    position: absolute;
+    font-size: 1.5rem;
     color: var(--nconsole-bg);
-    position: relative;
-    left: 25%; top: -90%;
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .console-area {
@@ -117,4 +101,118 @@ body {
         scrollbar-color: var(--console-color)
                          var(--console-bg);
     }
+}
+
+
+
+/*  */
+
+
+
+.hidden {
+    display: none;
+}
+
+.game-container {
+    flex-direction: column;
+    width: 500px; height: 400px;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.game-tab {
+    background-color: var(--console-bg);
+    padding: 10px;
+    cursor: move;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-icon {
+    width: 20px; height: 20px;
+}
+
+.game-title {
+    color: var(--nconsole-bg);
+    font-family: Raleway;
+    font-size: 15px;
+}
+
+.game-info {
+    display: flex;
+    gap: 10px;
+}
+
+#game-size, #game-close {
+    width: 30px; height: 30px;
+    line-height: 0;
+    padding: 0;
+    font-size: 20px;
+    border-radius: 50%; border: none;
+    background-color: var(--console-bg); color: var(--nconsole-bg);
+    transition: color 0.5s;
+}
+
+#game-btn {
+    display: flex;
+    gap: 10px;
+}
+
+#game-size:hover {
+    color: blue;
+    text-shadow: 0 0 15px rgb(0, 110, 255);
+}
+
+#game-close:hover {
+    color: red;
+    text-shadow: 0 0 15px rgb(255, 123, 0);
+}
+
+/* */
+
+.game {
+    width: 100%; height: calc(100% - 50px);
+    background-color: var(--nconsole-bg);
+    padding: 0;
+    position: relative;
+}
+
+.player, .platform {
+    bottom: 0; left: 0;
+}
+
+#player {
+    position: absolute;
+    width: 30px; height: 30px;
+    background-color: red;
+    top: 90%; left: 50px;
+}
+
+.platform {
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    background-color: brown;
+}
+
+/* */
+
+.full {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 100;
+    /* display: flex;
+    flex-direction: column; */
+    transition: all 0.3s ease;
+}
+
+.nfull {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 500px; height: 400px;
+    transition: all 0.3s ease;
 }
