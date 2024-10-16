@@ -74,13 +74,13 @@ body {
 
 .img-tab {
     position: relative;
-    left: 5%; top: -20%;
+    left: 5%; top: 15%;
 }
 
 .text-tab {
     color: var(--nconsole-bg);
     position: relative;
-    left: 25%; top: 15%;
+    left: 25%; top: -90%;
 }
 
 .console-area {
