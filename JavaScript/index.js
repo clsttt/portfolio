@@ -222,12 +222,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     } else if (!parts[2]) {
                         display('Error : missing number.')
                     } else {
+                        let num = parseInt(parts[2], 10);
                         if (parts[1] === 'bin') {
-                            display(`> ${parts[2]} -> binary = ${parts[2].toString(2)}`)
+                            display(`> ${parts[2]} -> binary = ${num.toString(2)}`)
                         } else if (parts[1] === 'hexa') {
-                            display(`> ${parts[2]} -> hexadecimal = ${parts[2].toString(16)}`)
+                            display(`> ${parts[2]} -> hexadecimal = ${num.toString(16)}`)
                         } else if (parts[1] === 'def') {
-                            display(`> ${parts[2]} -> default = ${parts[2].toString(10)}`)
+                            display(`> ${parts[2]} -> default = ${num.toString(10)}`)
                         }
                     }
                     break;
