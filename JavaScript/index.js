@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cfg: 'config',
         cl: 'clear',
         calc: 'calculate',
+        cv: 'convert',
         d: 'date',
         tm: 'timer',
         clstg: 'celeste-game'
@@ -212,6 +213,21 @@ document.addEventListener("DOMContentLoaded", function () {
                             display(`> ${expression} = ${result}`)
                         } catch (error) {
                             display('Error : invalid expression provided.')
+                        }
+                    }
+                    break;
+                case 'convert' :
+                    if (!parts[1]) {
+                        display('Error : missing type conversion.')
+                    } else if (!parts[2]) {
+                        display('Error : missing number.')
+                    } else {
+                        if (parts[1] === 'bin') {
+                            display(`> ${parts[2]} -> binary = ${parts[2].toString(2)}`)
+                        } else if (parts[1] === 'hexa') {
+                            display(`> ${parts[2]} -> hexadecimal = ${parts[2].toString(16)}`)
+                        } else if (parts[1] === 'def') {
+                            display(`> ${parts[2]} -> default = ${parts[2].toString(10)}`)
                         }
                     }
                     break;
