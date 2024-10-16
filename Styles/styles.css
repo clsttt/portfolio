@@ -78,7 +78,7 @@ body {
 .text-tab {
     color: var(--nconsole-bg);
     position: relative;
-    left: 25%; top: 0%;
+    left: 25%; top: 15%;
 }
 
 .console-area {
