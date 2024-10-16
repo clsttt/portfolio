@@ -20,6 +20,7 @@ body {
 }
 
 .console {
+    z-index: 0;
     background-color: var(--console-bg);
     position: absolute;
     height: 65%; width: 85%;
