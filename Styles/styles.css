@@ -53,12 +53,12 @@ body {
     outline: none;
 }
 
-.console-tab {
+/*.console-tab {
     background-color: var(--theme);
     width: 100%; height: 8%;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
-}
+}*/
 
 .curr-tab {
     background-color: var(--console-bg);
