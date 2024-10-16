@@ -3,6 +3,70 @@ document.addEventListener("DOMContentLoaded", function () {
     const input = document.getElementById('console-input')
     const output = document.getElementById('console-area')
 
+    const gameTab = document.getElementById('game-tab');
+    const gameContainer = document.getElementById('game-container');
+
+    if (!gameTab || !gameContainer) {
+        console.error("Les éléments 'game-tab' ou 'game-container' sont introuvables dans le DOM.");
+        return;
+    }
+
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    gameTab.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        offsetX = e.clientX - gameContainer.offsetLeft;
+        offsetY = e.clientY - gameContainer.offsetTop;
+        gameTab.style.cursor = "grabbing";
+    });
+
+    document.addEventListener('mousemove', function(e) {
+        if (isDragging) {
+            gameContainer.style.left = e.clientX - offsetX + 'px';
+            gameContainer.style.top = e.clientY - offsetY + 'px';
+        }
+    });
+
+    document.addEventListener('mouseup', function() {
+        isDragging = false;
+        gameTab.style.cursor = "move";
+    });
+
+    const closeButton = document.getElementById('game-close');
+    closeButton.addEventListener('click', function () {
+        gameContainer.classList.add('hidden')
+        input.style.display = 'flex'
+        display('> Game closed !')
+    });
+
+    const resizeButton = document.getElementById('game-size')
+    let sized = false
+    resizeButton.addEventListener('click', function () {
+        if (sized === false) {
+            sized = true
+            gameContainer.classList.add('full')
+            gameContainer.classList.remove('nfull')
+
+            gameContainer.style.width = '100vw';
+            gameContainer.style.height = '100vh';
+            gameContainer.style.left = '0';
+            gameContainer.style.top = '0';
+            gameContainer.style.transform = 'none';
+        } else {
+            sized = false
+            gameContainer.classList.add('nfull')
+            gameContainer.classList.remove('full')
+
+            gameContainer.style.width = '500px';
+            gameContainer.style.height = '400px';
+            gameContainer.style.left = '50%';
+            gameContainer.style.top = '50%';
+            gameContainer.style.transform = 'translateX(-50%) translateY(-50%)';
+        }
+    })
+
     const lineHeight = 35;
     let maxLines = calculateMaxLines();
 
@@ -15,7 +79,9 @@ document.addEventListener("DOMContentLoaded", function () {
         cfg: 'config',
         cl: 'clear',
         calc: 'calculate',
-        cd: 'countdown'
+        d: 'date',
+        cd: 'countdown',
+        clstg: 'celeste-game'
     }
 
     form.addEventListener('submit', function (e) {
@@ -56,17 +122,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
             switch (mainCommand) {
                 case 'help':
-                    display(`/help  -  Display list of commands.
-                        \n/config
+                    display(`/help - /h  -  Display list of commands.
+                        \n/config - /cfg
                         \n       L color [w/y/r/g/b]  -  Change main color.
                         \n       L theme [dark/light]  -  Change theme color.
                         \n       L bg [dark/light]  -  Change background color.
-                        \n/clear  -  Clear the console.
-                        \n/calculate [expression]  -  Calculate an expression.
-                        \n/countdown [time]  -  Start a countdown.
+                        \n/clear - /cl  -  Clear the console.
+                        \n/calculate - /calc (expression)  -  Calculate an expression.
+                        \n/date - /d  -  Display today's date and current hour.
+                        \n/countdown - /cd (timer)  -  Start a countdown.
                         \n/rps
-                        \n       L [rock/paper/scissors]  -  Play against the computer.
-                        \n       L score  -  See your RPS score.`);
+                        \n       L [rock/paper/scissors]  -  Play your choice against the computer.
+                        \n       L score  -  Check your rps score.
+                        \n/celeste-game - /clstg  -  Play my Portfolio (NOT FINISHED !).`);
                     break;
 
                 case 'config':
@@ -97,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         } else {
                             const themes = {
                                 light: '#ddd',
-                                dark: '#050505'
+                                dark: '#151515'
                             };
                             if (themes[parts[2]]) {
                                 document.documentElement.style.setProperty('--theme', themes[parts[2]]);
@@ -141,11 +209,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         try {
                             const result = eval(expression)
-                            display(`> Result : ${result}`)
+                            display(`> ${expression} = ${result}`)
                         } catch (error) {
                             display('Error : invalid expression provided.')
                         }
                     }
+                    break;
+                case 'date' :
+                    const now = new Date();
+                    const formattedDate = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+                    display(`> ${formattedDate}`)
+
                     break;
                 case 'countdown':
                     let count = parseInt(parts[1]);
@@ -187,10 +261,32 @@ document.addEventListener("DOMContentLoaded", function () {
                         display('Error : invalid play.');
                     }
                     break;
+
+                case 'celeste-game' :
+                    removeConsole()
+                    display('> Removing console access...')
+                    setTimeout(() => {
+                        display('> Recovering data...')
+                    }, 1500)
+                    setTimeout(() => {
+                        display('> Game is starting !')
+                    }, 3500)
+                    setTimeout(() => {
+                        launchGame()
+                    }, 4000);
+                    break;
                 default:
-                    display(`> No "/>${cmd}" command found.`);
+                    display(`> No "/${cmd}" command found.`);
             }
         }
+    }
+
+    function launchGame () {
+        gameContainer.classList.remove('hidden')
+    }
+    
+    function removeConsole () {
+        input.style.display = 'none'
     }
 
     output.addEventListener('scroll', () => {
