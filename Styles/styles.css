@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: var(--theme);
+    background-color: #111;
     transition: all 0.5s;
 }
 
