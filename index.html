@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="Styles/styles.css">
     <title>Portfolio ?</title>
 </head>
-<body onload="load();">
-    <div style="background-color: #222; color: #fff;">
+<body>
+    <div>
         <div id="infos">
             <h1 id="width-text">Width : <span id="width"></span>px</h1>
             <h1 id="height-text">Height : <span id="height"></span>px</h1>
@@ -15,10 +15,10 @@
     </div>
 
     <script>
-        function load () {
+        window.addEventListener("resize", () => {
             document.getElementById('width').innerText = window.innerWidth;
             document.getElementById('height').innerText = window.innerHeight;
-        }
+        });
     </script>
 </body>
 </html>
