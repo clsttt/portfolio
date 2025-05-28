@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 * {
-    z-index: 0;
+    background-color: #111; color: #fff;
     left: 0; top: 0;
     font-family: 'Roboto Mono';
 }
 
 body {
-    background-color: #111;
-    transition: all 0.5s;
+    background-color: #111;  color: #fff;
+/*     transition: all 0.5s; */
 }
 
 #infos {
     position: absolute;
     top: 15px; left: 15px;
     display: flex; flex-direction: column;
-    background-color: transparent;
+    background-color: transparent;  color: #fff;
 }
