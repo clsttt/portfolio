@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 * {
     z-index: 0;
     left: 0; top: 0;
-    font-family: Pixelify Sans;
+    font-family: 'Roboto Mono';
 }
 
 body {
@@ -15,5 +15,5 @@ body {
     position: absolute;
     top: 15px; left: 15px;
     display: flex; flex-direction: column;
+    background-color: transparent;
 }
-
